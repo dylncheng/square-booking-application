@@ -36,7 +36,7 @@ export default function Employee() {
             {
               employees.map((employee, index) => {
                 return( 
-                  <Card sx={{ mb:"10px" }}>
+                  <Card sx={{ mb:"10px" }} key={index}>
                     <CardContent> 
                           <FormLabel></FormLabel>
                           <FormControlLabel value={employee.name} control={<Radio />} label={
