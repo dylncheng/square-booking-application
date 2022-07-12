@@ -17,7 +17,7 @@ const employees = [
   {
     name: 'Henry',
     experience: "6 years",
-    description: "Josh is trained as a professional cat feeder, however his training is for naught—exemplified by his cat Peanut"
+    description: "Josh is trained as a professional cat feeder, however his training is for naught—exemplified by his cat Peanut!"
   },
   {
     name: 'Daniel',
