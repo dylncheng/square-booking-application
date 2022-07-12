@@ -21,7 +21,7 @@ export default function Services() {
         <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
         >
-            Men's
+            {"Men's"}
         </AccordionSummary>
         <AccordionDetails>
             <RadioGroup
