@@ -6,7 +6,6 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import React from 'react'
-import { Box } from '@mui/system';
 
 
 export default function Employee({ employees }) {
@@ -24,7 +23,7 @@ export default function Employee({ employees }) {
                           <FormControlLabel value={employee.name} control={<Radio />} label={
                             <>
                               <Typography>
-                                <strong>{"Length of Experiennce: "}</strong>
+                                <strong>{"Length of Experience: "}</strong>
                                 {employee.experience}
                               </Typography>
                               <Typography component="p">
