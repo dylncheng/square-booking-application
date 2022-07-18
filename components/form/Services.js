@@ -26,7 +26,7 @@ export default function Services({ services }) {
                 >
                 { Object.keys(services).map((name) => {
                     return (
-                        <Accordion sx={{ minWidth: '80%', mb:"10px" }} color="secondary">
+                        <Accordion sx={{ minWidth: '80%', mb:"10px" }} color="secondary" key={name}>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
                             >
@@ -35,7 +35,7 @@ export default function Services({ services }) {
                             <AccordionDetails>
                                     {services[name].map((service) => {
                                         return(
-                                            <Box>
+                                            <Box key={service}>
                                                 <FormControlLabel value={name + '-' + service} control={<Radio />} label={service} />
                                             </Box> 
                                         )
