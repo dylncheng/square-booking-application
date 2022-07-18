@@ -1,4 +1,5 @@
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material'
+import { Box } from '@mui/system';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -7,34 +8,46 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import React from 'react'
 
+
 const services = {
-    
 
 }
 
 
 
-export default function Services() {
-  return (
-   <>
-    <Accordion sx={{ minWidth:'80%' }} color="secondary">
-        <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-        >
-            {"Men's"}
-        </AccordionSummary>
-        <AccordionDetails>
-            <RadioGroup
-                aria-labelledby="demo-radio-buttons-group-label"
-                defaultValue="female"
-                name="radio-buttons-group"
-            >
-                <FormControlLabel value="female" control={<Radio />} label="Perm" />
-                <FormControlLabel value="male" control={<Radio />} label="Haircut" />
-                <FormControlLabel value="other" control={<Radio />} label="Other" />
-            </RadioGroup>
-        </AccordionDetails>
-    </Accordion>
-   </>
-  )
+export default function Services({ services }) {
+    return (
+        <>
+            <FormControl>
+                <RadioGroup
+                    aria-labelledby="demo-radio-buttons-group-label"
+                    defaultValue="none"
+                    name="service"
+                >
+                { Object.keys(services).map((name) => {
+                    return (
+                        <Accordion sx={{ minWidth: '80%', mb:"10px" }} color="secondary" key={name}>
+                            <AccordionSummary
+                                expandIcon={<ExpandMoreIcon />}
+                            >
+                                {name}
+                            </AccordionSummary>
+                            <AccordionDetails>
+                                    {services[name].map((service) => {
+                                        return(
+                                            <Box key={service}>
+                                                <FormControlLabel value={name + '-' + service} control={<Radio />} label={service} />
+                                            </Box> 
+                                        )
+                                    })}
+                            </AccordionDetails>
+                        </Accordion>
+                        )
+                    }) }
+                </RadioGroup>
+            </FormControl>
+        </>
+ 
+        
+    )
 }
