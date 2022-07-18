@@ -13,27 +13,36 @@ const services = {
 
 
 
-export default function Services() {
+export default function Services({ services }) {
     return (
         <>
-            <Accordion sx={{ minWidth: '80%' }} color="secondary">
-                <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                >
-                    {"Men's"}
-                </AccordionSummary>
-                <AccordionDetails>
-                    <RadioGroup
-                        aria-labelledby="demo-radio-buttons-group-label"
-                        defaultValue="female"
-                        name="radio-buttons-group"
-                    >
-                        <FormControlLabel value="female" control={<Radio />} label="Perm" />
-                        <FormControlLabel value="male" control={<Radio />} label="Haircut" />
-                        <FormControlLabel value="other" control={<Radio />} label="Other" />
-                    </RadioGroup>
-                </AccordionDetails>
-            </Accordion>
+            { Object.keys(services).map((name) => {
+                return (
+                    <Accordion sx={{ minWidth: '80%' }} color="secondary">
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                        >
+                            {name}
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <RadioGroup
+                                aria-labelledby="demo-radio-buttons-group-label"
+                                defaultValue={name}
+                                name="service"
+                            >
+                                {services[name].map((service) => {
+                                    return(
+                                        <FormControlLabel value={service} control={<Radio />} label={service} />
+                                    )
+
+                                })}
+                            </RadioGroup>
+                        </AccordionDetails>
+                            
+                        
+                    </Accordion>
+                    )
+                }) }
         </>
     )
 }

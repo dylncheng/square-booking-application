@@ -8,26 +8,8 @@ import FormLabel from '@mui/material/FormLabel';
 import React from 'react'
 import { Box } from '@mui/system';
 
-const employees = [
-  {
-    name: 'Josh',
-    experience: "6 years",
-    description: "Josh is trained as a professional cat feeder, however his training is for naught—exemplified by his cat Peanut"
-  },
-  {
-    name: 'Henry',
-    experience: "6 years",
-    description: "Josh is trained as a professional cat feeder, however his training is for naught—exemplified by his cat Peanut!"
-  },
-  {
-    name: 'Daniel',
-    experience: "2 years",
-    description: "Daniel is cool"
-  }
-]
 
-
-export default function Employee() {
+export default function Employee({ employees }) {
   return (
     <>
       <Box>
