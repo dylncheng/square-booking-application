@@ -6,6 +6,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import React from 'react'
+import { Box } from '@mui/system';
 
 
 export default function Employee({ employees }) {

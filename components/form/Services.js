@@ -36,7 +36,7 @@ export default function Services({ services }) {
                                     {services[name].map((service) => {
                                         return(
                                             <Box>
-                                                <FormControlLabel value={service} control={<Radio />} label={service} />
+                                                <FormControlLabel value={name + '-' + service} control={<Radio />} label={service} />
                                             </Box> 
                                         )
                                     })}
