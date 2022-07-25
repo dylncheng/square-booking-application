@@ -1,5 +1,4 @@
 import React from 'react'
-import 'react-calendar/dist/Calendar.css'
 import { DateTimePicker } from '@mui/x-date-pickers';
 import { TextField } from '@mui/material';
 import { useState } from 'react';
