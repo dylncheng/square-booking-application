@@ -1,7 +1,7 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import styles from '../../styles/landing.module.css'
 import Button from '@mui/material/Button'
-import { StepContent, Stepper, Step, Typography, StepLabel, Box } from "@mui/material";
+import { StepContent, Stepper, Step, Typography, StepLabel, Box, Card, CardContent } from "@mui/material";
 import HorizontalLinearStepper from "../../components/form/HorizontalLinearStepper"
 import Header from "../../components/header/Header"
 import Services from "../../components/form/Services";
@@ -30,14 +30,16 @@ const store = {
         }
       ],
     services: {
-        men: ['perm', 'haircut', 'hair color'],
-        women: ['straight perm', 'blow dry', 'haircut', 'hair color']
+        'Men': ['Perm', 'Haircut', 'Hair Color'],
+        'Women': ['Straight Perm', 'Blow dry', 'Haircut', 'Hair Color']
     }
 }
 
 export default function Landing({client}) {
     const [step, setStep] = useState(1);
     const [activeStep, setActiveStep] = useState(0);
+    const [selectedService, setSelectedService] = useState(null);
+    const [selectedEmployee, setSelectedEmployee] = useState(null);
 
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -72,35 +74,55 @@ export default function Landing({client}) {
                 </>
             ) : (
                 <>
-                    <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent:'center', minWidth:'100%', marginTop:'5%' }}>
-                        {steps.map((step, index) => {
-                            return(
-                                <React.Fragment key={index}>
-                                    {index == 0 && activeStep == 0 && <Services key={index} services={store.services}/>}
-                                    {index == 1 && activeStep == 1 && <Employee key={index} employees={store.employees} />}
-                                    {index == 2 && activeStep == 2 && <Date key={index}/>}
-                                    {activeStep == 3} 
-                                </React.Fragment>
-                            );
+                    <Box sx={{ display:'flex', flexDirection: 'row', justifyContent:'space-between', marginTop:'5%', marginRight:'8%', marginLeft:'8%' }}>
+                        <Box sx={{ maxWidth:'50%' }}>
+                            {steps.map((step, index) => {
+                                return(
+                                    <React.Fragment key={index}>
+                                        {index == 0 && activeStep == 0 && <Services key={index} services={store.services} selectedService={selectedService} setSelectedService={setSelectedService}/>}
+                                        {index == 1 && activeStep == 1 && <Employee key={index} employees={store.employees} selectedEmployee={selectedEmployee} setSelectedEmployee={setSelectedEmployee}/>}
+                                        {index == 2 && activeStep == 2 && <Date key={index}/>}
+                                        {activeStep == 3} 
+                                    </React.Fragment>
+                                );
 
-                            })}
-
+                                })}
                         </Box>
-                        <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2, position:'absolute', bottom: 0, minWidth:'100%' }} >
-                            <Button
-                            color="inherit"
-                            disabled={activeStep === 0}
-                            onClick={handleBack}
-                            sx={{ mr: 1 }}
-                            >
-                            Back
-                            </Button>
-                            <Box sx={{ flex: '1 1 auto' }} />
-                            <Button onClick={handleNext}>
-                                {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                            </Button>
-                        </Box>
-                    </>
+                        <Card className="summary" sx={{width:'35%', height:'60%'}}> 
+                            <CardContent>
+                                <Typography sx={{textAlign:'center', display:'block'}} variant='h6' gutterBottom>
+                                    Summary
+                                </Typography>
+                                {
+                                    selectedService &&
+                                    <Typography variant='p' sx={{display:'block', textAlign:'center'}}>
+                                        Selected Service: {selectedService.split('-')[1]}
+                                    </Typography>
+                                }
+                                {
+                                    selectedEmployee &&
+                                    <Typography variant='p' sx={{display:'block', textAlign:'center'}}>
+                                        Selected Employee: {selectedEmployee}
+                                    </Typography>
+                                }
+                            </CardContent>
+                        </Card>
+                    </Box>
+                    <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2, position:'absolute', bottom: 0, minWidth:'100%' }} >
+                        <Button
+                        color="inherit"
+                        disabled={activeStep === 0}
+                        onClick={handleBack}
+                        sx={{ mr: 1 }}
+                        >
+                        Back
+                        </Button>
+                        <Box sx={{ flex: '1 1 auto' }} />
+                        <Button onClick={handleNext}>
+                            {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                        </Button>
+                    </Box>
+                </>
                 )}
             </Box>
             

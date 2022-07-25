@@ -9,12 +9,15 @@ import React from 'react'
 import { Box } from '@mui/system';
 
 
-export default function Employee({ employees }) {
+export default function Employee({ employees, selectedEmployee, setSelectedEmployee }) {
   return (
     <>
       <Box>
         <FormControl>
-          <RadioGroup>
+          <RadioGroup
+            onChange={(e, value) => setSelectedEmployee(value)}
+            value={selectedEmployee}
+          >
             {
               employees.map((employee, index) => {
                 return( 

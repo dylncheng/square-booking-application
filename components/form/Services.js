@@ -9,13 +9,8 @@ import FormLabel from '@mui/material/FormLabel';
 import React from 'react'
 
 
-const services = {
 
-}
-
-
-
-export default function Services({ services }) {
+export default function Services({ services, selectedService, setSelectedService }) {
     return (
         <>
             <FormControl>
@@ -23,6 +18,8 @@ export default function Services({ services }) {
                     aria-labelledby="demo-radio-buttons-group-label"
                     defaultValue="none"
                     name="service"
+                    onChange={(e, value) => setSelectedService(value)}
+                    value={selectedService}
                 >
                 { Object.keys(services).map((name) => {
                     return (
