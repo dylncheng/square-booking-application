@@ -1,20 +1,22 @@
 import { Container } from 'react-bootstrap'
+import { useRouter } from 'next/router'
 import { AuthProvider } from '../contexts/AuthContext'
-import Signup from '../components/Signup'
 import '../styles/globals.css'
+import ProtectedRoute from '../components/ProtectedRoute'
+
+const noAuthRequired = ['/Login', '/Signup']
 
 function MyApp({ Component, pageProps }) {
-  // return <Component {...pageProps} />
+  const router = useRouter()
   return (
     <AuthProvider>
-      <Container 
-        className='d-flex align-items-center justify-content-center'
-        style = {{minHeight : "100vh"}}
-      > 
-        <div className = "w-100" style = {{maxWidth : "400px"}}>
-          <Signup />
-        </div>
-      </Container>
+      {noAuthRequired.includes(router.pathname) ? (
+        <Component {...pageProps} />
+      ) : (
+        <ProtectedRoute>
+          <Component {...pageProps} />
+        </ProtectedRoute>
+      )}
     </AuthProvider>
   )
 }
