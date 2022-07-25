@@ -49,14 +49,6 @@ export default function Landing({client}) {
 
     return(
         <>
-            {/* <nav><Typography variant="h1" componnent="h2">This is the nav!</Typography></nav> */}
-            {/* <Button variant="contained" onClick={()=>setStep((prevStep) => prevStep + 1)}>Increment Step</Button> */}
-            {/* eventually change this into ternary with placeholder */}
-            {/* { step === 1  && <StepOne/> } 
-            { step === 2 && <StepTwo/> }
-            { step === 3 && <StepThree/> } */}
-            {/* <HorizontalLinearStepper/> */}
-            
             <Box sx={{ width: '80%', height: '80%'}} position="absolute" top="10%">
                 <Header/>
                 <Stepper activeStep={activeStep} alternativeLabel>
@@ -80,7 +72,6 @@ export default function Landing({client}) {
                 </>
             ) : (
                 <>
-                    {/* <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography> */}
                     <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent:'center', minWidth:'100%', marginTop:'5%' }}>
                         {steps.map((step, index) => {
                             return(
