@@ -59,7 +59,7 @@ export default function Home() {
         </div>
       </ThemeProvider>
     </LocalizationProvider>
-  )
+  );
   // return (
   //   <div className={styles.container}>
   //     <Head>
