@@ -2,16 +2,18 @@ import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import { useAuth } from '../contexts/AuthContext'
 
-export default function ProtectedRoute({children}) {
+const ProtectedRoute = ({children}) => {
 
-    const { user } = useAuth()
+    const { currentUser } = useAuth()
     const router = useRouter()
 
     useEffect(() => {
-        if (!user) {
+        if (!currentUser) {
             router.push('/Login')
         }
-    }, [router, user])
+    }, [router, currentUser])
 
-  return <>{user ? children : null}</>
+  return <>{currentUser ? children : null}</>
 }
+
+export default ProtectedRoute

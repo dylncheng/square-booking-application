@@ -8,18 +8,20 @@ export default function Login() {
   const router = useRouter()
   const emailRef = useRef()
   const passwordRef = useRef()
-  const { login } = useAuth()
+  const { currentUser, login } = useAuth()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   
   async function handleSubmit(e) {
     e.preventDefault()
 
+    console.log(currentUser)
+
     try {
         setError('')
         setLoading(true)
         await login(emailRef.current.value, passwordRef.current.value)
-        router.push('/home')
+        router.push('/')
     } catch (err) {
         console.log(err)
         setError("Failed to log in")
