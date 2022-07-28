@@ -8,14 +8,14 @@ export default function Login() {
   const router = useRouter()
   const emailRef = useRef()
   const passwordRef = useRef()
-  const { currentUser, login } = useAuth()
+  const { user, login } = useAuth()
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   
   async function handleSubmit(e) {
     e.preventDefault()
 
-    console.log(currentUser)
+    console.log(user)
 
     try {
         setError('')

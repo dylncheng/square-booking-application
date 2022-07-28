@@ -7,7 +7,9 @@ import Header from "../../components/header/Header"
 import Services from "../../components/form/Services";
 import Employee from "../../components/form/Employee";
 import Date from "../../components/form/Date";
+import { useAuth } from "../../contexts/AuthContext"
 import React from 'react'
+
 
 const steps = ['Select a service', 'Choose a stylist', 'Choose a date', 'Choose a time', 'Summary'];
 
@@ -38,6 +40,8 @@ const store = {
 export default function Landing({client}) {
     const [step, setStep] = useState(1);
     const [activeStep, setActiveStep] = useState(0);
+    const [error, setError] = useState("")
+    const { currentUser, logout } = useAuth()
 
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
@@ -46,6 +50,17 @@ export default function Landing({client}) {
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
+
+    async function handleLogout() {
+        setError("")
+    
+        try {
+          await logout()
+          history.push("/login")
+        } catch {
+          setError("Failed to log out")
+        }
+      }
 
     return(
         <>
@@ -104,6 +119,14 @@ export default function Landing({client}) {
                             >
                             Back
                             </Button>
+                            <Button
+                            color="inherit"
+                            disabled={activeStep === 0}
+                            onClick={handleLogout}
+                            sx={{ mr: 1 }}
+                            >
+                            Logout
+                            </Button>
                             <Box sx={{ flex: '1 1 auto' }} />
                             <Button onClick={handleNext}>
                                 {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
@@ -115,8 +138,6 @@ export default function Landing({client}) {
             
             
         </>
-
-
         
     )
 }
