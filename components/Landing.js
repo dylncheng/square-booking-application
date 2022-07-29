@@ -45,15 +45,21 @@ export default function Landing({client}) {
 	const [selectedTime, setSelectedTime] = useState(null);
 
     const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
+        setActiveStep((prevActiveStep) => {
+            window.localStorage.setItem("activeStep", prevActiveStep - 1);
+           return prevActiveStep - 1;
+        });
       };
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => {
             window.localStorage.setItem("selectedService", selectedService);
             window.localStorage.setItem("selectedEmployee", selectedEmployee);
-            window.localStorage.setItem("selectedDate", selectedDate);
-            window.localStorage.setItem("selectedTime", selectedTime);
+            if(window.localStorage.getItem("selectedDate")) {
+                window.localStorage.setItem("selectedDate", selectedDate);
+                window.localStorage.setItem("selectedTime", selectedTime);
+            }
+            window.localStorage.setItem("activeStep", prevActiveStep + 1);
             return prevActiveStep + 1;
         });
     };
@@ -61,6 +67,7 @@ export default function Landing({client}) {
     useEffect(() => {
         setSelectedService(window.localStorage.getItem("selectedService"));
         setSelectedEmployee(window.localStorage.getItem("selectedEmployee"));
+        setActiveStep(window.localStorage.getItem("activeStep")?window.localStorage.getItem("activeStep"):0);
 
         if(window.localStorage.getItem("selectedDate")) {
             setSelectedDate(moment(window.localStorage.getItem("selectedDate")));
