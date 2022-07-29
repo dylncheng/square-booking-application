@@ -46,8 +46,8 @@ export default function Landing({client}) {
 
     const handleBack = () => {
         setActiveStep((prevActiveStep) => {
-            window.localStorage.setItem("activeStep", prevActiveStep - 1);
-           return prevActiveStep - 1;
+            // window.localStorage.setItem("activeStep", prevActiveStep - 1);
+            return prevActiveStep - 1;
         });
       };
 
@@ -55,11 +55,11 @@ export default function Landing({client}) {
         setActiveStep((prevActiveStep) => {
             window.localStorage.setItem("selectedService", selectedService);
             window.localStorage.setItem("selectedEmployee", selectedEmployee);
-            if(window.localStorage.getItem("selectedDate")) {
+            if(window.localStorage.getItem("selectedEmployee")) {
                 window.localStorage.setItem("selectedDate", selectedDate);
                 window.localStorage.setItem("selectedTime", selectedTime);
             }
-            window.localStorage.setItem("activeStep", prevActiveStep + 1);
+            // window.localStorage.setItem("activeStep", prevActiveStep + 1);
             return prevActiveStep + 1;
         });
     };
