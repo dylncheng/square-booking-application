@@ -12,7 +12,7 @@ import { ContentCut } from '@mui/icons-material'
 export default function Header() {
     return (
         <Box sx={{height: '15%'}}>
-            <AppBar position="static">
+            <AppBar position="absolute">
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
                     <ContentCut sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -24,7 +24,7 @@ export default function Header() {
                         sx={{
                         mr: 2,
                         display: { xs: 'none', md: 'flex' },
-                        fontFamily: 'monospace',
+                        fontFamily: 'Arial',
                         fontWeight: 700,
                         letterSpacing: '.3rem',
                         color: 'inherit',
