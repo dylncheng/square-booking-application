@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react"
-import styles from '../../styles/landing.module.css'
 import Button from '@mui/material/Button'
 import { StepContent, Stepper, Step, Typography, StepLabel, Box, Card, CardContent } from "@mui/material";
-import HorizontalLinearStepper from "../../components/form/HorizontalLinearStepper"
-import Header from "../../components/header/Header"
-import Services from "../../components/form/Services";
-import Employee from "../../components/form/Employee";
-import Date from "../../components/form/Date";
+import HorizontalLinearStepper from "./form/HorizontalLinearStepper"
+import Header from "./header/Header"
+import Services from "./form/Services";
+import Employee from "./form/Employee";
+import Date from "./form/Date";
 import React from 'react'
 
 const steps = ['Select a service', 'Choose a stylist', 'Choose a date', 'Choose a time', 'Summary'];
@@ -46,8 +45,17 @@ export default function Landing({client}) {
       };
 
     const handleNext = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        setActiveStep((prevActiveStep) => {
+            window.localStorage.setItem("selectedService", selectedService);
+            window.localStorage.setItem("selectedEmployee", selectedEmployee);
+            return prevActiveStep + 1;
+        });
     };
+
+    useEffect(() => {
+        setSelectedService(window.localStorage.getItem("selectedService"));
+        setSelectedEmployee(window.localStorage.getItem("selectedEmployee"));
+    }, [])
 
     return(
         <>
@@ -118,15 +126,13 @@ export default function Landing({client}) {
                         Back
                         </Button>
                         <Box sx={{ flex: '1 1 auto' }} />
-                        <Button onClick={handleNext}>
+                        <Button onClick={handleNext} disabled={!((activeStep==0 && selectedService)||(activeStep==1 && selectedEmployee))?true:false}>
                             {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                         </Button>
                     </Box>
                 </>
                 )}
             </Box>
-            
-            
         </>
 
 
