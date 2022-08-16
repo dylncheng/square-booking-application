@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import Button from '@mui/material/Button'
-import { StepContent, Stepper, Step, Typography, StepLabel, Box, Card, CardContent } from "@mui/material";
+import { StepContent, Stepper, Step, Typography, StepLabel, Box, Card, CardContent, Divider, List, ListItem } from "@mui/material";
 import HorizontalLinearStepper from "./form/HorizontalLinearStepper"
 import Header from "./header/Header"
 import Services from "./form/Services";
@@ -8,6 +8,7 @@ import Employee from "./form/Employee";
 import Date from "./form/Date";
 import moment from "moment";
 import React from 'react'
+import { indigo, amber } from '@mui/material/colors'
 
 const steps = ['Select a service', 'Choose a stylist', 'Choose a date & time', 'Summary'];
 
@@ -114,35 +115,67 @@ export default function Landing({client}) {
 
                                 })}
                         </Box>
-                        <Card className="summary" sx={{width:activeStep==3?'50%':'35%', height:'60%'}}> 
+                        <Card className="summary" sx={{width:activeStep==3?'50%':'35%', height:'60%', bgcolor: indigo[50], borderRadius: 3, borderColor: indigo[200], border: 2, boxShadow: "none" }}> 
                             <CardContent>
-                                <Typography sx={{textAlign:'center', display:'block'}} variant='h6' gutterBottom>
+                                <Typography sx={{textAlign:'left', display:'block'}} variant='h6' gutterBottom>
                                     Summary
                                 </Typography>
+                                <Divider sx={{ mb: 1 }}></Divider>
                                 <Box sx={{ display:'flex', flexDirection:'column', justifyContent:'space-around' }} >
+                                    {/* {
+                                        selectedService &&
+                                            <Box sx={{ borderRadius: 1, px: 1, py: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                                                <Typography sx={{ mt: -0.5, fontSize: 20, px: 0.5, textAlign: 'center' }}>
+                                                    {selectedService.split('-')[1]}
+                                                </Typography>
+                                                <Typography sx={{ fontSize: 12, color: indigo[700], bgcolor: indigo[100], borderRadius: 2, px: 0.5, width: 'fit-content', height: 'fit-content' }}>
+                                                    Service
+                                                </Typography>
+                                            </Box>
+                                    } */}
                                     {
                                         selectedService &&
-                                        <Typography variant='p' sx={{display:'block', textAlign:'center'}} gutterBottom>
-                                            Selected Service: {selectedService.split('-')[1]}
-                                        </Typography>
+                                            <Box sx={{ borderRadius: 1, py: 1 }}>
+                                                <Typography sx={{ fontSize: 12, color: indigo[700], mx: 0.5 }}>
+                                                    Service
+                                                </Typography>
+                                                <Typography sx={{ fontSize: 18, bgcolor: amber[50], borderRadius: 2, px: 1, width: 'fit-content', mt: 0.5 }}>
+                                                    {selectedService.split('-')[1]}
+                                                </Typography>
+                                            </Box>
                                     }
                                     {
-                                        selectedEmployee &&
-                                        <Typography variant='p' sx={{display:'block', textAlign:'center'}} gutterBottom>
-                                            Selected Employee: {selectedEmployee}
-                                        </Typography>
+                                        selectedService &&
+                                            <Box sx={{ borderRadius: 1, py: 1 }}>
+                                                <Typography sx={{ fontSize: 12, color: indigo[700], mx: 0.5 }}>
+                                                    Employee
+                                                </Typography>
+                                                <Typography sx={{ fontSize: 18, bgcolor: amber[50], borderRadius: 2, px: 1, width: 'fit-content', mt: 0.5 }}>
+                                                    {selectedEmployee}
+                                                </Typography>
+                                            </Box>
                                     }
                                     {
-                                        selectedDate &&
-                                        <Typography variant='p' sx={{display:'block', textAlign:'center'}} gutterBottom>
-                                            Selected Date: {selectedDate.format('LL')}
-                                        </Typography>
+                                        selectedService &&
+                                            <Box sx={{ borderRadius: 1, py: 1 }}>
+                                                <Typography sx={{ fontSize: 12, color: indigo[700], mx: 0.5 }}>
+                                                    on
+                                                </Typography>
+                                                <Typography sx={{ fontSize: 18, bgcolor: amber[50], borderRadius: 2, px: 1, width: 'fit-content', mt: 0.5 }}>
+                                                    {selectedDate.format('LL')}
+                                                </Typography>
+                                            </Box>
                                     }
                                     {
-                                        selectedTime &&
-                                        <Typography variant='p' sx={{display:'block', textAlign:'center'}} gutterBottom>
-                                            Selected Time: {selectedTime.format('LT')}
-                                        </Typography>
+                                        selectedService &&
+                                            <Box sx={{ borderRadius: 1, py: 1 }}>
+                                                <Typography sx={{ fontSize: 12, color: indigo[700], mx: 0.5 }}>
+                                                    at
+                                                </Typography>
+                                                <Typography sx={{ fontSize: 18, bgcolor: amber[50], borderRadius: 2, px: 1, width: 'fit-content', mt: 0.5 }}>
+                                                    {selectedTime.format('LT')}
+                                                </Typography>
+                                            </Box>
                                     }
                                 </Box>
                             </CardContent>
