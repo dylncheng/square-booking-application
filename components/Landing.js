@@ -8,7 +8,10 @@ import Employee from "./form/Employee";
 import Date from "./form/Date";
 import moment from "moment";
 import React from 'react'
+import { app, db } from '../firebaseConfig'
+import { collection, addDoc, updateDoc, doc, increment } from "firebase/firestore"; 
 import { indigo, amber } from '@mui/material/colors'
+import { useRouter } from "next/router";
 
 const steps = ['Select a service', 'Choose a stylist', 'Choose a date & time', 'Summary'];
 
@@ -37,13 +40,15 @@ const store = {
     }
 }
 
-export default function Landing({client}) {
+function Landing() {
     const [step, setStep] = useState(1);
     const [activeStep, setActiveStep] = useState(0);
     const [selectedService, setSelectedService] = useState(null);
     const [selectedEmployee, setSelectedEmployee] = useState(null);
     const [selectedDate, setSelectedDate] = useState(null);
 	const [selectedTime, setSelectedTime] = useState(null);
+    const router = useRouter();
+    let { referral } = router.query;
 
     const handleBack = () => {
         setActiveStep((prevActiveStep) => {
@@ -66,6 +71,7 @@ export default function Landing({client}) {
     };
 
     useEffect(() => {
+        console.log(referral)
         setSelectedService(window.localStorage.getItem("selectedService"));
         setSelectedEmployee(window.localStorage.getItem("selectedEmployee"));
         setActiveStep(window.localStorage.getItem("activeStep")?window.localStorage.getItem("activeStep"):0);
@@ -74,6 +80,22 @@ export default function Landing({client}) {
             setSelectedDate(moment(window.localStorage.getItem("selectedDate")));
             setSelectedTime(moment(window.localStorage.getItem("selectedTime")));
         }
+        console.log(router)
+        // console.log(referral)
+
+        if(referral !== null) {
+            const docRef = doc(db, "test_analytics", "swag dressers")
+            console.log(router.query)
+            updateDoc(docRef, {
+                [referral]: increment(1)
+            
+            })
+        }
+
+
+
+        // console.log(docRef)
+
     }, [])
 
     return(
@@ -204,3 +226,5 @@ export default function Landing({client}) {
         
     )
 }
+
+export default Landing;

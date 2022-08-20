@@ -31,7 +31,7 @@ export default function Header() {
                         textDecoration: 'none',
                         }}
                     >
-                        SWAG DRESSERS
+                        pls let us finish in time
                     </Typography>
                     {/* <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
                         <IconButton
