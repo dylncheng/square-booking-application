@@ -1,27 +1,22 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+// Catalog
+import { Client, Environment, ApiError } from "square";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyDokXV4DL7QILAwB_9YpUT171FxkZwIabM",
-  authDomain: "square-77ebc.firebaseapp.com",
-  projectId: "square-77ebc",
-  storageBucket: "square-77ebc.appspot.com",
-  messagingSenderId: "703369521236",
-  appId: "1:703369521236:web:751a9195b1ec48ee9365c1",
-  measurementId: "G-WQZ8DYFY3F"
-};
+const token = 'EAAAEOH5YElmKG06unvtXfxZM44aq0GuooL8UxPcsKzhgHpT-Mm7WTdomp19bbzr';
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+const client = new Client({
+  accessToken: token,
+  environment: Environment.Sandbox,
+});
 
-export default function handler(req, res) {
-  res.status(200).json({ name: 'John Doe' })
+export const getCatalog = async () => {
+  try {
+      const response = await client.catalogApi.listCatalog();
+      return response.result;
+      //console.log(response.result);
+      //console.log(response.result.objects[0].categoryData.name);
+    } catch(error) {
+      return error;
+    }
 }

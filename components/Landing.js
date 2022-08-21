@@ -32,15 +32,30 @@ const store = {
           experience: "2 years",
           description: "Daniel is cool"
         }
-      ],
-    services: {
+    ]
+}
+
+/*
+
+'D224KQKTM5ZV2VDVLOYPBLHU': {
+            category_services: {
+                "Men's Haircut": {
+                    id: 'N3NDUI66DKACLPV4OO64343P'
+                }
+            },
+            name: "Men" 
+        }
+{
         'Men': ['Perm', 'Haircut', 'Hair Color'],
         'Women': ['Straight Perm', 'Blow dry', 'Haircut', 'Hair Color'],
         'Dogs': ['Shower', 'Standard Grooming', 'Premium Grooming'],
     }
-}
+*/
 
-function Landing() {
+
+
+
+function Landing({services}) {
     const [step, setStep] = useState(1);
     const [activeStep, setActiveStep] = useState(0);
     const [selectedService, setSelectedService] = useState(null);
@@ -48,7 +63,7 @@ function Landing() {
     const [selectedDate, setSelectedDate] = useState(null);
 	const [selectedTime, setSelectedTime] = useState(null);
     const router = useRouter();
-    let { referral } = router.query;
+    let { referral } = router.query;  
 
     const handleBack = () => {
         setActiveStep((prevActiveStep) => {
@@ -70,7 +85,9 @@ function Landing() {
         });
     };
 
+    
     useEffect(() => {
+    
         console.log(referral)
         setSelectedService(window.localStorage.getItem("selectedService"));
         setSelectedEmployee(window.localStorage.getItem("selectedEmployee"));
@@ -91,13 +108,10 @@ function Landing() {
             
             })
         }
-
-
-
         // console.log(docRef)
 
     }, [])
-
+    
     return(
         <>
             <Header/>
@@ -128,7 +142,7 @@ function Landing() {
                             {steps.map((step, index) => {
                                 return(
                                     <React.Fragment key={index}>
-                                        {index == 0 && activeStep == 0 && <Services key={index} services={store.services} selectedService={selectedService} setSelectedService={setSelectedService}/>}
+                                        {index == 0 && activeStep == 0 && <Services key={index} services={services} selectedService={selectedService} setSelectedService={setSelectedService}/>}
                                         {index == 1 && activeStep == 1 && <Employee key={index} employees={store.employees} selectedEmployee={selectedEmployee} setSelectedEmployee={setSelectedEmployee}/>}
                                         {index == 2 && activeStep == 2 && <Date key={index} date={selectedDate} setDate={setSelectedDate} time={selectedTime} setTime={setSelectedTime} />}
                                         {activeStep == 3} 

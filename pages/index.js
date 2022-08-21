@@ -2,8 +2,14 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Landing from '../components/Landing'
+import { getCatalog } from './api/hello.js' 
+import { useEffect } from 'react'
 
-export default function Home() {
+export default function Home({services}) {
+  useEffect(() => {
+    console.log("hellooo");
+  }, []);
+
   return (
         <div className={styles.container}>
           <Head>
@@ -14,11 +20,34 @@ export default function Home() {
           </Head>
 
           <main className={styles.main}>
-            <Landing/>
+            <Landing services={services}/>
           </main>
 
           <footer className={styles.footer}>
           </footer>
         </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  // Fetch data from external API
+  const services = {};
+
+  let result = await getCatalog();
+  result.objects.forEach(object => {
+    if (object.type === 'CATEGORY') {
+        services[object.id] = { 
+                                        category_services: {}, 
+                                        name: object.categoryData.name
+                                    };
+    } else {
+        services[object.itemData.categoryId].category_services[object.itemData.name] = { id: object.id };
+        //console.log(services);
+    }
+  });
+  console.log("___________________________________");
+  console.log(services);
+
+  // Pass data to the page via props
+  return { props: { services } }
 }
