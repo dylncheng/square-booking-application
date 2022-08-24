@@ -27,8 +27,7 @@ export default function Employee({ employees, selectedEmployee, setSelectedEmplo
                           <FormControlLabel value={employee.name} control={<Radio />} label={
                             <>
                               <Typography>
-                                <strong>{"Length of Experience: "}</strong>
-                                {employee.experience}
+                                <strong>{employee.name}</strong>
                               </Typography>
                               <Typography component="p">
                                 <strong>{"Description: "}</strong>

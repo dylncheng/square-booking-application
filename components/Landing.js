@@ -15,6 +15,7 @@ import { useRouter } from "next/router";
 
 const steps = ['Select a service', 'Choose a stylist', 'Choose a date & time', 'Summary'];
 
+/*
 const store = {
     employees: [
         {
@@ -34,6 +35,7 @@ const store = {
         }
     ]
 }
+*/
 
 /*
 
@@ -55,7 +57,7 @@ const store = {
 
 
 
-function Landing({services}) {
+function Landing({services, employees}) {
     const [step, setStep] = useState(1);
     const [activeStep, setActiveStep] = useState(0);
     const [selectedService, setSelectedService] = useState(null);
@@ -143,7 +145,7 @@ function Landing({services}) {
                                 return(
                                     <React.Fragment key={index}>
                                         {index == 0 && activeStep == 0 && <Services key={index} services={services} selectedService={selectedService} setSelectedService={setSelectedService}/>}
-                                        {index == 1 && activeStep == 1 && <Employee key={index} employees={store.employees} selectedEmployee={selectedEmployee} setSelectedEmployee={setSelectedEmployee}/>}
+                                        {index == 1 && activeStep == 1 && <Employee key={index} employees={employees} selectedEmployee={selectedEmployee} setSelectedEmployee={setSelectedEmployee}/>}
                                         {index == 2 && activeStep == 2 && <Date key={index} date={selectedDate} setDate={setSelectedDate} time={selectedTime} setTime={setSelectedTime} />}
                                         {activeStep == 3} 
                                     </React.Fragment>
