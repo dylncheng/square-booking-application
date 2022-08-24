@@ -192,7 +192,7 @@ function Landing({services}) {
                                             </Box>
                                     }
                                     {
-                                        selectedService &&
+                                        selectedService && selectedDate &&
                                             <Box sx={{ borderRadius: 1, py: 1 }}>
                                                 <Typography sx={{ fontSize: 12, color: indigo[700], mx: 0.5 }}>
                                                     on
@@ -203,7 +203,7 @@ function Landing({services}) {
                                             </Box>
                                     }
                                     {
-                                        selectedService &&
+                                        selectedService && selectedDate &&
                                             <Box sx={{ borderRadius: 1, py: 1 }}>
                                                 <Typography sx={{ fontSize: 12, color: indigo[700], mx: 0.5 }}>
                                                     at
