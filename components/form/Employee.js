@@ -19,19 +19,19 @@ export default function Employee({ employees, selectedEmployee, setSelectedEmplo
             value={selectedEmployee}
           >
             {
-              employees.map((employee, index) => {
+              Object.keys(employees).map((id, index) => {
                 return( 
                   <Card sx={{ mb:"10px" }} key={index}>
                     <CardContent> 
                           <FormLabel></FormLabel>
-                          <FormControlLabel value={employee.name} control={<Radio />} label={
+                          <FormControlLabel value={id} control={<Radio />} label={
                             <>
                               <Typography>
-                                <strong>{employee.name}</strong>
+                                <strong>{employees[id].name}</strong>
                               </Typography>
                               <Typography component="p">
                                 <strong>{"Description: "}</strong>
-                                {employee.description}
+                                {employees[id].description}
                               </Typography>
                             </>
                           }>
