@@ -1,14 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-// Catalog
-import { Client, Environment, ApiError } from "square";
-
-const token = 'EAAAEOH5YElmKG06unvtXfxZM44aq0GuooL8UxPcsKzhgHpT-Mm7WTdomp19bbzr';
-
-const client = new Client({
-  accessToken: token,
-  environment: Environment.Sandbox,
-});
+import { client } from "../../squareConfig.js";
 
 export const getCatalog = async () => {
   try {
@@ -24,6 +16,15 @@ export const getCatalog = async () => {
 export const getStylists = async () => {
   try {
     const response = await client.bookingsApi.listTeamMemberBookingProfiles(true);
+    return response.result;
+  } catch(error) {
+    console.log(error);
+  }
+}
+
+export const getLocation = async () => {
+  try {
+    const response = await client.locationsApi.listLocations();
     return response.result;
   } catch(error) {
     console.log(error);

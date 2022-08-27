@@ -42,11 +42,13 @@ export async function getServerSideProps(context) {
                                         name: object.categoryData.name
                                     };
     } else {
+        console.log(object);
         services[object.itemData.categoryId].category_services[object.itemData.name] = { 
           id: object.id,
           teamMemberIds: object.itemData.variations[0].itemVariationData.teamMemberIds,
           price: Number(object.itemData.variations[0].itemVariationData.priceMoney.amount) / 100,
-          duration: Number(object.itemData.variations[0].itemVariationData.serviceDuration) / 3600000
+          duration: Number(object.itemData.variations[0].itemVariationData.serviceDuration) / 3600000,
+          version_id: object.version
         };
         //console.log(object.itemData.variations[0].itemVariationData.teamMemberIds);
         //console.log(services);
