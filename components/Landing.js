@@ -102,14 +102,14 @@ function Landing({services, employees}) {
         console.log(router)
         // console.log(referral)
 
-        if(referral !== null) {
-            const docRef = doc(db, "test_analytics", "swag dressers")
-            console.log(router.query)
-            updateDoc(docRef, {
-                [referral]: increment(1)
+        // if(referral !== null) {
+        //     const docRef = doc(db, "test_analytics", "swag dressers")
+        //     console.log(router.query)
+        //     updateDoc(docRef, {
+        //         [referral]: increment(1)
             
-            })
-        }
+        //     })
+        // }
         // console.log(docRef)
 
     }, [])
@@ -183,13 +183,13 @@ function Landing({services, employees}) {
                                             </Box>
                                     }
                                     {
-                                        selectedService &&
+                                        selectedService && selectedEmployee &&
                                             <Box sx={{ borderRadius: 1, py: 1 }}>
                                                 <Typography sx={{ fontSize: 12, color: indigo[700], mx: 0.5 }}>
                                                     Employee
                                                 </Typography>
                                                 <Typography sx={{ fontSize: 18, bgcolor: amber[50], borderRadius: 2, px: 1, width: 'fit-content', mt: 0.5 }}>
-                                                    {selectedEmployee}
+                                                    {employees[selectedEmployee].name}
                                                 </Typography>
                                             </Box>
                                     }
