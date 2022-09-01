@@ -48,7 +48,7 @@ export async function getServerSideProps(context) {
           teamMemberIds: object.itemData.variations[0].itemVariationData.teamMemberIds,
           price: Number(object.itemData.variations[0].itemVariationData.priceMoney.amount) / 100,
           duration: Number(object.itemData.variations[0].itemVariationData.serviceDuration) / 3600000,
-          version_id: object.version
+          version_id: Number(object.version)
         };
         //console.log(object.itemData.variations[0].itemVariationData.teamMemberIds);
         //console.log(services);
