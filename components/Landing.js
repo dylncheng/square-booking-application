@@ -12,6 +12,7 @@ import { app, db } from '../firebaseConfig'
 import { collection, addDoc, updateDoc, doc, increment } from "firebase/firestore"; 
 import { indigo, amber } from '@mui/material/colors'
 import { useRouter } from "next/router";
+import { ConstructionOutlined } from "@mui/icons-material";
 
 const steps = ['Select a service', 'Choose a stylist', 'Choose a date & time', 'Summary'];
 
@@ -61,6 +62,7 @@ function Landing({services, employees}) {
     const [step, setStep] = useState(1);
     const [activeStep, setActiveStep] = useState(0);
     const [selectedService, setSelectedService] = useState(null);
+    const [bookableEmployees, setBookableEmployees] = useState([]);
     const [selectedEmployee, setSelectedEmployee] = useState(null);
     const [selectedDate, setSelectedDate] = useState(null);
 	const [selectedTime, setSelectedTime] = useState(null);
@@ -86,6 +88,24 @@ function Landing({services, employees}) {
             return prevActiveStep + 1;
         });
     };
+
+    useEffect(() => {
+        // services[]
+        console.log(services)
+        console.log(selectedService)
+        if(selectedService)
+            Object.keys(services).map((categoryId) => {
+                Object.keys(services[categoryId].category_services).map((variationName) => {
+                    if(variationName == selectedService.split('-')[1])
+                        setBookableEmployees(services[categoryId].category_services[variationName].teamMemberIds.filter(id => {
+                            return Boolean(employees[id]);
+                        }))
+                })
+            })
+
+    }, [selectedService])
+
+    useEffect(() => console.log("selectedEmployee: ", selectedEmployee), [selectedEmployee])
 
     
     useEffect(() => {
@@ -145,7 +165,7 @@ function Landing({services, employees}) {
                                 return(
                                     <React.Fragment key={index}>
                                         {index == 0 && activeStep == 0 && <Services key={index} services={services} selectedService={selectedService} setSelectedService={setSelectedService}/>}
-                                        {index == 1 && activeStep == 1 && <Employee key={index} employees={employees} selectedEmployee={selectedEmployee} setSelectedEmployee={setSelectedEmployee}/>}
+                                        {index == 1 && activeStep == 1 && <Employee key={index} employeeIds={bookableEmployees} employees={employees} selectedEmployee={selectedEmployee} setSelectedEmployee={setSelectedEmployee}/>}
                                         {index == 2 && activeStep == 2 && <Date key={index} date={selectedDate} setDate={setSelectedDate} time={selectedTime} setTime={setSelectedTime} />}
                                         {activeStep == 3} 
                                     </React.Fragment>

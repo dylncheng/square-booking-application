@@ -65,7 +65,7 @@ export async function getServerSideProps(context) {
       description: object.description,
     }
   });
-  console.log(employees);
+  console.log("Employees in index.js: ", employees);
 
 
   // Pass data to the page via props

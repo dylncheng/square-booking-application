@@ -5,23 +5,30 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import React from 'react'
+import { useEffect } from 'react'
 import { Box } from '@mui/system';
 
 
-export default function Employee({ employees, selectedEmployee, setSelectedEmployee }) {
+export default function Employee({ employeeIds, employees, selectedEmployee, setSelectedEmployee }) {
+  useEffect(() => {
+    console.log("employeeIds HERE:", employeeIds)
+  }, [])
+
   return (
     <>
       <Box>
         <FormControl>
           <RadioGroup
-            onChange={(e, value) => setSelectedEmployee(value)}
+            onChange={(e, value) => {
+              setSelectedEmployee(value)
+            }}
             value={selectedEmployee}
           >
             {
-              Object.keys(employees).map((id, index) => {
+              employeeIds.map((id) => {
+                console.log("cameron iterating over id: ", id)
                 return( 
-                  <Card sx={{ mb:"10px" }} key={index}>
+                  <Card sx={{ mb:"10px" }} key={id}>
                     <CardContent> 
                           <FormLabel></FormLabel>
                           <FormControlLabel value={id} control={<Radio />} label={
