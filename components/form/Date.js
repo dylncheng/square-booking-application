@@ -6,6 +6,16 @@ import { useState } from 'react';
 
 
 export default function Date({ date, setDate, time, setTime}) {
+	useEffect(() => {
+		async function fetchData() {
+			// You can await here
+			let response = await fetch("/api/searchAvailability?year=2022&month=09&day=01&teamMemberId=TMXnofIHkl-b_7M3&locationId=LSAFKQJGB2MYG&serviceVariationId=MD7WR3TFGCLHPKF62OTMWBIL");
+			console.log(response);
+			// ...
+		}
+		fetchData();
+
+	}, [])
 
 	return (
 		<>

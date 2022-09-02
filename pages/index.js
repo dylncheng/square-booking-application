@@ -2,7 +2,9 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Landing from '../components/Landing'
-import { getCatalog, getStylists } from './api/hello.js' 
+import { getCatalog } from "./api/getCatalog";
+import { getStylists } from "./api/getStylists";
+import { getLocation} from "./api/getLocation";
 import { useEffect } from 'react'
 
 export default function Home({services, employees}) {
@@ -34,8 +36,10 @@ export async function getServerSideProps(context) {
   const services = {};
   
   let result = await getCatalog();
+  
   result.objects.forEach(object => {
     if (object.type === 'CATEGORY') {
+        console.log(object);
         services[object.id] = { 
                                         category_services: {
                                         }, 
@@ -43,8 +47,9 @@ export async function getServerSideProps(context) {
                                     };
     } else {
         console.log(object);
+        console.log("Service Variation ID: ", object.itemData.variations);
         services[object.itemData.categoryId].category_services[object.itemData.name] = { 
-          id: object.id,
+          id: object.itemData.variations[0].id,
           teamMemberIds: object.itemData.variations[0].itemVariationData.teamMemberIds,
           price: Number(object.itemData.variations[0].itemVariationData.priceMoney.amount) / 100,
           duration: Number(object.itemData.variations[0].itemVariationData.serviceDuration) / 3600000,
@@ -64,7 +69,7 @@ export async function getServerSideProps(context) {
   result_stylist.teamMemberBookingProfiles.forEach(object => {
     employees[object.teamMemberId] = {
       name: object.displayName,
-      description: object.description,
+      description: object.description ? object.description:null,
     }
   });
   console.log("Employees in index.js: ", employees);
