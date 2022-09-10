@@ -15,31 +15,7 @@ import { useRouter } from "next/router";
 import { ConstructionOutlined } from "@mui/icons-material";
 
 const steps = ['Select a service', 'Choose a stylist', 'Choose a date & time', 'Summary'];
-
 /*
-const store = {
-    employees: [
-        {
-          name: 'Josh',
-          experience: "6 years",
-          description: "Josh is trained as a professional cat feeder, however his training is for naught—exemplified by his cat Peanut"
-        },
-        {
-          name: 'Henry',
-          experience: "6 years",
-          description: "Choose me—I'm Henry"
-        },
-        {
-          name: 'Daniel',
-          experience: "2 years",
-          description: "Daniel is cool"
-        }
-    ]
-}
-*/
-
-/*
-
 'D224KQKTM5ZV2VDVLOYPBLHU': {
             category_services: {
                 "Men's Haircut": {
@@ -55,7 +31,10 @@ const store = {
     }
 */
 
-
+async function submitBooking(date, teamMemberId, serviceVariationId, serviceVariationVersion, locationId, customerId, durationMinutes) {
+    await fetch(`/api/createBooking?date=${date}&teamMemberId=${teamMemberId}&serviceVariationId=MD7WR3TFGCLHPKF62OTMWBIL&serviceVariationVersion=1662006699658&locationId=LSAFKQJGB2MYG&customerId=141NWHDVWBGVQHY4S0T18KMMXR&durationMinutes=30`)
+    console.log("yeay");
+    }
 
 
 function Landing({services, employees}) {
@@ -77,6 +56,12 @@ function Landing({services, employees}) {
       };
 
     const handleNext = () => {
+        if (activeStep === steps.length - 2) {
+            console.log("I'm calling!");
+            console.log("TIME: " + selectedTime)
+            console.log("HERE: " + selectedDate);
+            submitBooking(selectedTime.format(), selectedEmployee);
+        }
         setActiveStep((prevActiveStep) => {
             window.localStorage.setItem("selectedService", selectedService);
             window.localStorage.setItem("selectedEmployee", selectedEmployee);
@@ -87,6 +72,7 @@ function Landing({services, employees}) {
             // window.localStorage.setItem("activeStep", prevActiveStep + 1);
             return prevActiveStep + 1;
         });
+
     };
 
     useEffect(() => {
@@ -257,9 +243,6 @@ function Landing({services, employees}) {
                 )}
             </Box>
         </>
-
-
-        
     )
 }
 

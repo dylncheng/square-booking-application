@@ -13,7 +13,7 @@ export default async function handler(req, res) {
           booking: {
             startAt: date,
             locationId: locationId,
-            customerId: customerId,
+            customerId: '141NWHDVWBGVQHY4S0T18KMMXR',
             appointmentSegments: [
               {
                 durationMinutes: durationMinutes,
@@ -26,7 +26,7 @@ export default async function handler(req, res) {
         });
       
         console.log(response.result);
-        res.status(200).json(response.result);
+        res.status(200)
       } catch(error) {
         console.log(error);
       }

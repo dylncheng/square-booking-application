@@ -22,7 +22,9 @@ export default function Date({ date, setDate, time, setTime}) {
 			}))
 			// ...
 		}
-		fetchData();
+		if (date != null) {
+			fetchData();
+		}
 
 	}, [date])
 
@@ -42,8 +44,8 @@ export default function Date({ date, setDate, time, setTime}) {
 				{
 					dateList.map((d, index) => {
 						return (
-							<Grid item xs={4}>
-								<Card onClick={() => handleTimeSelect(moment(d))}>{moment(d).format('HH:mm')}</Card>
+							<Grid item xs={4} key={index}>
+								<Card  onClick={() => handleTimeSelect(moment(d))}>{moment(d).format('HH:mm')}</Card>
 							</Grid>
 						);
 						
